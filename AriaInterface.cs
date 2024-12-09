@@ -17,8 +17,11 @@ namespace AutoSimRT
 
         public static void Connect()
         {
-            connection = new SqlConnection("data source = SLTVARDB3; initial catalog = VARIAN; persist security info = True; user id = AriaReader; password = ecivres; MultipleActiveResultSets = True");
+            //connection = new SqlConnection("data source = ; initial catalog = ; persist security info = True; user id = ; password = ; MultipleActiveResultSets = True");
 
+            string filename = @"\\ltvastmanland.se\ltv\shares\vradiofy\RADIOFYSIK NYSTART\Ö_Erik\02 Programmering\C# scripting\aria_account_information.txt";
+            string connect = File.ReadAllText(filename);
+            connection = new SqlConnection(connect);
             connection.Open();
         }
 
