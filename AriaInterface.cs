@@ -17,11 +17,14 @@ namespace AutoSimRT
 
         public static void Connect()
         {
+            //Fill out with approriate information about your Varian DB and username + password
             //connection = new SqlConnection("data source = ; initial catalog = ; persist security info = True; user id = ; password = ; MultipleActiveResultSets = True");
 
+            //Following rows can be erased when previous info is filled out
             string filename = @"\\ltvastmanland.se\ltv\shares\vradiofy\RADIOFYSIK NYSTART\Ö_Erik\02 Programmering\C# scripting\aria_account_information.txt";
             string connect = File.ReadAllText(filename);
             connection = new SqlConnection(connect);
+
             connection.Open();
         }
 
