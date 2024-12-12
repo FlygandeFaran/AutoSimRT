@@ -121,7 +121,7 @@ namespace AutoSimRT
             //Save
             mp = new MousePoint(960, 730);
             SetCursorPosition(mp);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             CheckIfMoved(mp);
             MouseClick();
             Thread.Sleep(1000);
