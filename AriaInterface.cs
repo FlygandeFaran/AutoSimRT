@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace AutoSimRT
 {
@@ -105,6 +106,39 @@ namespace AutoSimRT
                                                             ");
             Disconnect();
             if (datatable.Rows[0].ItemArray[0].ToString() == "1")
+            {
+                ok = true;
+            }
+            return ok;
+        }
+        public static bool CheckAlreadyScannedPatient(string patID, string startDate)
+        {
+            bool ok = false;
+            Connect();
+            DataTable datatable = AriaInterface.Query(@"SELECT 
+	                                                        COUNT(Patient.PatientId)
+                                                        FROM
+                                                            ScheduledActivity WITH (NOLOCK),
+                                                            Activity WITH (NOLOCK),
+                                                            ActivityInstance WITH (NOLOCK),
+                                                            Patient WITH (NOLOCK),
+                                                            ResourceActivity WITH (NOLOCK),
+                                                            Machine WITH (NOLOCK)
+                                                        WHERE
+	                                                        Patient.PatientId LIKE '" + patID + @"' AND
+	                                                        ScheduledActivity.PatientSer = Patient.PatientSer AND
+	                                                        ActivityInstance.ActivityInstanceSer = ScheduledActivity.ActivityInstanceSer AND
+                                                            ScheduledActivity.ScheduledStartTime BETWEEN '2024-01-01' AND '" + startDate + @"' AND
+	                                                        ScheduledActivity.ScheduledActivitySer = ResourceActivity.ScheduledActivitySer AND
+	                                                        ResourceActivity.ResourceSer = Machine.ResourceSer AND
+                                                            Machine.MachineId LIKE 'CT Canon' AND
+	                                                        Activity.ActivitySer = ActivityInstance.ActivitySer AND
+	                                                        (Activity.ActivityCode = 'DIB DT' OR
+	                                                        Activity.ActivityCode = '4D DT')
+                                                            ");
+            Disconnect();
+            int count = int.Parse(datatable.Rows[0].ItemArray[0].ToString());
+            if (count > 0)
             {
                 ok = true;
             }

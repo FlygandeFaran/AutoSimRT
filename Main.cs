@@ -33,8 +33,11 @@ namespace AutoSimRT
             var db = AriaInterface.GetScheduledSimPatientsOnCT(startDate.ToString(), endDate.ToString());
             foreach (DataRow dr in db.Rows)
             {
-                clbCTpatients.Items.Add(dr.ItemArray[0].ToString());
-                clbCTpatients.SetItemChecked(clbCTpatients.Items.Count - 1, true);
+                string patId = dr.ItemArray[0].ToString();
+                bool alreadyScanned = AriaInterface.CheckAlreadyScannedPatient(patId, startDate.ToString());
+                clbCTpatients.Items.Add(patId);
+                if (!alreadyScanned)
+                    clbCTpatients.SetItemChecked(clbCTpatients.Items.Count - 1, true);
             }
         }
 
