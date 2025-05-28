@@ -124,7 +124,7 @@ namespace AutoSimRT
             Thread.Sleep(1000);
             CheckIfMoved(mp);
             MouseClick();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
         }
         private static void MouseClick()
         {
