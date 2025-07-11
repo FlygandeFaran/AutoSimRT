@@ -19,7 +19,7 @@ namespace AutoSimRT
         public static void Connect()
         {
             //Fill out with approriate information about your Varian DB and username + password
-            //connection = new SqlConnection("data source = ; initial catalog = ; persist security info = True; user id = ; password = ; MultipleActiveResultSets = True");
+            //connection = new SqlConnection("data source = SLTVARDB3; initial catalog = VARIAN; persist security info = True; user id =  ; password = ; Connection Timeout=5; MultipleActiveResultSets = True");
 
             //Following rows can be erased when previous info is filled out
             string filename = @"\\ltvastmanland.se\ltv\shares\vradiofy\RADIOFYSIK NYSTART\Ö_Erik\02 Programmering\C# scripting\aria_account_information.txt";

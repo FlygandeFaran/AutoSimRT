@@ -18,11 +18,14 @@ namespace AutoSimRT
         static void Main()
         {
             Main form1 = new Main();
+            InfoOverlay infoOverlay = new InfoOverlay();
             DialogResult result = form1.ShowDialog();
 
             if (result == DialogResult.OK)
             {
+                infoOverlay.Show();
                 Run(form1.CheckedPatients);
+                infoOverlay.Close();
             }
             else if (result == DialogResult.Yes)
             {
@@ -36,7 +39,9 @@ namespace AutoSimRT
                     Sex = "Male",
                     BirthDate = birthDate
                 };
+                infoOverlay.Show();
                 SchedulePatient(testPatientInfo);
+                infoOverlay.Close();
             }
 
         }
@@ -121,10 +126,10 @@ namespace AutoSimRT
             //Save
             mp = new MousePoint(960, 730);
             SetCursorPosition(mp);
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
             CheckIfMoved(mp);
             MouseClick();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
         }
         private static void MouseClick()
         {
